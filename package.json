@@ -9,8 +9,19 @@
     "git": "git add . && git commit && git push origin main"
   },
   "dependencies": {
+    "@date-io/date-fns": "1.x",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@line/liff": "2.21.4",
+    "@material-ui/pickers": "^3.3.10",
+    "@mui/lab": "^5.0.0-alpha.122",
+    "@mui/material": "^5.11.12",
+    "@mui/x-date-pickers": "^6.0.0",
+    "@types/react-datepicker": "^4.10.0",
+    "date-fns": "^2.29.3",
+    "dayjs": "^1.11.7",
     "react": "18.2.0",
+    "react-datepicker": "^4.10.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {

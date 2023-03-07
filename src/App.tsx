@@ -1,58 +1,42 @@
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import "./App.css";
+import { Button } from "@mui/material";
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider, 	jaJP, DatePicker } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
+import 'dayjs/locale/ja';
+
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 function App() {
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-// sendMessages call
-  if (!liff.isInClient()) {
-    window.alert('This button is unavailable as LIFF is currently being opened in an external browser.');
-  } else {
-    liff.sendMessages([
-        {
-            type: 'text',
-            text: 'Hello, World!',
-        },
-    ])
-        .then(() => {
-            window.alert('Message sent');
-        })
-        .catch((error) => {
-            window.alert('Error sending message: ' + error);
-        });
-  }
-  useEffect(() => {
-    liff
-      .init({
-        liffId: import.meta.env.VITE_LIFF_ID
-      })
-      .then(() => {
-        setMessage("LIFF init succeeded.");
-      })
-      .catch((e: Error) => {
-        setMessage("LIFF init failed.");
-        setError(`${e}`);
-      });
-  });
-
   return (
-    <div className="App">
-      <h1>create-liff-app</h1>
-      {message && <p>{message}</p>}
-      {error && (
-        <p>
-          <code>{error}</code>
-        </p>
-      )}
-      <a
-        href="https://developers.line.biz/ja/docs/liff/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        LIFF Documentation
-      </a>
-    </div>
+    <Box sx={{ width: '100%' }}>
+      <Stack spacing={2}>
+        <Item>Item 1</Item>
+        <Item>Item 2</Item>
+        <Item>Item 3</Item>
+        <LocalizationProvider dateAdapter={AdapterDayjs} localeText={jaJP.components.MuiLocalizationProvider.defaultProps.localeText} adapterLocale="ja">
+          <DatePicker 
+          label="日付"
+          defaultValue={dayjs(new Date())}
+          // format="YYYY年MM月DD日"
+          />
+        </LocalizationProvider>
+      </Stack>
+    </Box>
   );
 }
 
