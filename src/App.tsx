@@ -29,10 +29,10 @@ function App() {
         <Item>Item 2</Item>
         <Item>Item 3</Item>
         <LocalizationProvider dateAdapter={AdapterDayjs} localeText={jaJP.components.MuiLocalizationProvider.defaultProps.localeText} adapterLocale="ja">
-          <DatePicker 
+          <DatePicker
           label="日付"
           defaultValue={dayjs(new Date())}
-          // format="YYYY年MM月DD日"
+          view="day"
           />
         </LocalizationProvider>
       </Stack>
