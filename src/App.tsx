@@ -33,6 +33,13 @@ function App() {
           label="日付"
           defaultValue={dayjs(new Date())}
           view="day"
+          componentsProps={{
+            toolbar: {
+            toolbarPlaceholder: "__",
+            toolbarFormat: "YYYY年MM月DD日",
+            hidden: false,
+            }
+          }}
           />
         </LocalizationProvider>
       </Stack>
