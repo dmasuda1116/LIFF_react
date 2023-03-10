@@ -500,6 +500,11 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.16.17.tgz#c5a1a4bfe1b57f0c3e61b29883525c6da3e5c091"
   integrity sha512-y+EHuSchhL7FjHgvQL/0fnnFmO4T1bhvWANX6gcnqTjtnKWbTvUMCpGnv2+t+31d7RzyEAYAd4u2fnIhHL6N/Q==
 
+"@fontsource/roboto@^4.5.8":
+  version "4.5.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-4.5.8.tgz#56347764786079838faf43f0eeda22dd7328437f"
+  integrity sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA==
+
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
   resolved "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.1.1.tgz"
@@ -1076,6 +1081,13 @@
   version "5.11.12"
   resolved "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.11.12.tgz"
   integrity sha512-LHh8HZQ5nPVcW5QnyLwkAZ40txc/S2bzKMQ3bTO+5mjuwAJ2AzQrjZINLVy1geY7ei1pHXVqO1hcWHg/QdT44w==
+
+"@mui/icons-material@^5.11.11":
+  version "5.11.11"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.11.11.tgz#d4e01bd405b0dac779f5e060586277f91f3acb6e"
+  integrity sha512-Eell3ADmQVE8HOpt/LZ3zIma8JSvPh3XgnhwZLT0k5HRqZcd6F/QDHc7xsWtgz09t+UEFvOYJXjtrwKmLdwwpw==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
 
 "@mui/lab@^5.0.0-alpha.122":
   version "5.0.0-alpha.122"
