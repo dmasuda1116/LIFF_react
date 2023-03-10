@@ -134,8 +134,8 @@ function App() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <Grid item xs={1}/>
-        <Grid item xs={10}>
+        <Grid item xs={0.5}/>
+        <Grid item xs={12}>
           <Box sx={{ width: '100%' }}>
             <Stack spacing={2}>
               <Box component="span" sx={{ p: 2}}>
@@ -298,7 +298,7 @@ function App() {
             </Stack>
           </Box>
          </Grid>
-         <Grid item xs={1}/>
+         <Grid item xs={0.5}/>
         </Grid>
       </Box>
   );
