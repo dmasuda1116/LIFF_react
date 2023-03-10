@@ -47,17 +47,40 @@ const Account_name =[
 
 function App() {
   const [date, setDate] = useState("");
-  function register() {
-    liff.sendMessages([{
-        'type': 'text',
-        'text': "テスト"
-    }]).then(function () {
-        liff.closeWindow();
-    }).catch(function (error) {
-        window.alert('Failed to send message ' + error);
-    });
-}
 
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    liff
+      .init({
+        liffId: import.meta.env.VITE_LIFF_ID
+      })
+      .then(() => {
+        setMessage("LIFF init succeeded.");
+      })
+      .catch((e: Error) => {
+        setMessage("LIFF init failed.");
+        setError(`${e}`);
+      });
+  });
+
+  function register() {
+    liff
+      .sendMessages([
+        {
+          type: "text",
+          text: "Hello, World!",
+        },
+      ])
+      .then(() => {
+        console.log("message sent");
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+    liff.closeWindow();
+  }
   function close(){
     liff.closeWindow();
   }
