@@ -46,6 +46,16 @@ const Account_name =[
 ]
 
 function App() {
+  const [registerEmail, setRegisterEmail] = useState("");
+  function handleClick() {
+    alert('Hello, Material-UI!');
+    liff.sendMessages([
+      {
+        type: "text",
+        text: "hello",
+      },
+    ]);
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -130,7 +140,7 @@ function App() {
                     <Button variant="outlined" startIcon={<DeleteIcon />}>
                       削除
                     </Button>
-                    <Button variant="contained" endIcon={<SendIcon />}>
+                    <Button onClick={handleClick} variant="contained" endIcon={<SendIcon />}>
                       登録
                     </Button>
                   </Stack>
