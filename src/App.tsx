@@ -64,23 +64,17 @@ function App() {
         setError(`${e}`);
       });
   });
-
   function register() {
-    liff
-      .sendMessages([
-        {
-          type: "text",
-          text: "Hello, World!",
-        },
-      ])
-      .then(() => {
-        console.log("message sent");
-      })
-      .catch((err) => {
-        console.log("error", err);
-      });
-    liff.closeWindow();
+    liff.sendMessages([{
+        'type': 'text',
+        'text': "test",
+    }]).then(function () {
+        liff.closeWindow();
+    }).catch(function (error) {
+        window.alert('Failed to send message ' + error);
+    });
   }
+
   function close(){
     liff.closeWindow();
   }
