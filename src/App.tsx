@@ -47,14 +47,25 @@ const Account_name =[
 
 function App() {
   const [registerEmail, setRegisterEmail] = useState("");
-  function handleClick() {
+  function register() {
     alert('Hello, Material-UI!');
-    liff.sendMessages([
-      {
-        type: "text",
-        text: "hello",
-      },
-    ]);
+    liff
+      .sendMessages([
+        {
+          type: "text",
+          text: "Hello, World!",
+        },
+      ])
+      .then(() => {
+        console.log("message sent");
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+    liff.closeWindow();
+  }
+  function close(){
+    liff.closeWindow();
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -137,10 +148,10 @@ function App() {
                 <Grid item xs={4}/>
                 <Grid item xs={8}>
                   <Stack direction="row" spacing={2}>
-                    <Button variant="outlined" startIcon={<DeleteIcon />}>
+                    <Button onClick={close} variant="outlined" startIcon={<DeleteIcon />}>
                       削除
                     </Button>
-                    <Button onClick={handleClick} variant="contained" endIcon={<SendIcon />}>
+                    <Button onClick={register} variant="contained" endIcon={<SendIcon />}>
                       登録
                     </Button>
                   </Stack>
