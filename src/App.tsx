@@ -45,11 +45,32 @@ const Account_name =[
   {label: "当座預金", id: 1}
 ]
 
+const subAccount_name =[
+  {label: "補助科目なし", id: 0},
+  {label: "小口現金", id: 1}
+]
+
 function App() {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Dayjs>(dayjs());
+  const [in_out, setIn_out] = useState("");
+  const [account_1, setAccount_1] = useState("");
+  const [subaccount_1, setSubAccount_1] = useState("");
+  const [account_2, setAccount_2] = useState("");
+  const [subaccount_2, setSubAccount_2] = useState("");
+  const [amount, setAmount] = useState(Number);
+  const [memo, setMemo] = useState("");
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  type Inputs = {
+    applicationDate: Date | null
+  }
+
+  const handleDateChange = (newDate: Dayjs | null) => {
+    if (newDate) {
+      setDate(newDate);
+    }
+  };
 
   useEffect(() => {
     liff
@@ -67,11 +88,11 @@ function App() {
   function register() {
     liff.sendMessages([{
         'type': 'text',
-        'text': "test",
+      'text': "簿記会計\n"+dayjs(date.valueOf()).format('YYYY/MM/DD')+"\n"+account_1+"\n"+subaccount_1+"\n"+amount+"\n"+account_2+"\n"+subaccount_2+"\n"+amount+"\n"+memo,
     }]).then(function () {
         liff.closeWindow();
     }).catch(function (error) {
-        window.alert('Failed to send message ' + error);
+        window.alert("Fail to send message" + error);
     });
   }
 
@@ -100,6 +121,8 @@ function App() {
                       hidden: true,
                     }
                   }}
+                  value={date}
+                  onChange={handleDateChange}
                 />
               </LocalizationProvider>
               <Typography variant="h5" gutterBottom>
@@ -111,22 +134,35 @@ function App() {
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
+                  value={in_out}
+                  onChange={(event) => {setIn_out(event.target.value);}}
                 >
                   <FormControlLabel value="収入" control={<Radio />} label="収入" />
                   <FormControlLabel value="支出" control={<Radio />} label="支出" />
                 </RadioGroup>
               </FormControl>
               <Autocomplete
+                defaultValue={{label: "現金", id: 0}}
                 disablePortal
                 id="combo-box-demo"
                 options={Account_name}
                 renderInput={(params) => <TextField {...params} label="勘定科目" />}
+                inputValue={account_1}
+                onInputChange={(event, newInputValue) => {
+                  setAccount_1(newInputValue);
+                }}
+
               />
               <Autocomplete
+                defaultValue={{label: "補助科目なし", id: 0}}
                 disablePortal
                 id="combo-box-demo"
-                options={Account_name}
+                options={subAccount_name}
                 renderInput={(params) => <TextField {...params} label="補助科目" />}
+                inputValue={subaccount_1}
+                onInputChange={(event, newInputValue) => {
+                  setSubAccount_1(newInputValue);
+                }}
               />
               <Typography variant="h5" gutterBottom>
                 ③用途と金額を入力
@@ -136,12 +172,21 @@ function App() {
                 id="combo-box-demo"
                 options={Account_name}
                 renderInput={(params) => <TextField {...params} label="勘定科目" />}
+                inputValue={account_2}
+                onInputChange={(event, newInputValue) => {
+                  setAccount_2(newInputValue);
+                }}
               />
               <Autocomplete
+                defaultValue={{label: "補助科目なし", id: 0}}
                 disablePortal
                 id="combo-box-demo"
-                options={Account_name}
+                options={subAccount_name}
                 renderInput={(params) => <TextField {...params} label="補助科目" />}
+                inputValue={subaccount_2}
+                onInputChange={(event, newInputValue) => {
+                  setSubAccount_2(newInputValue);
+                }}
               />
 
               <FormControl fullWidth sx={{ m: 1 }}>
@@ -155,12 +200,25 @@ function App() {
                     inputMode: 'numeric', // 数字入力モードを指定
                     style: { textAlign: 'right' }, // 右寄せにするためのスタイル
                   }}
+                  value={amount}
+                  onChange={(event) => {
+                    const newValue = event.target.value;
+                    if (/^\d*$/.test(newValue)) {
+                      setAmount(newValue === '' ? 0 : parseInt(newValue, 10));
+                    }
+                  }}
+
                 />
               </FormControl>
               <Typography variant="h5" gutterBottom>
                 ④その他事項を入力し登録
               </Typography>
-              <TextField id="outlined-basic" label="摘要" variant="outlined" />
+              <TextField
+              id="outlined-basic"
+              label="摘要"
+              variant="outlined"
+              value={memo}
+              onChange={(event) => {setMemo(event.target.value);}} />
               <Grid container spacing={2}>
                 <Grid item xs={4}/>
                 <Grid item xs={8}>
