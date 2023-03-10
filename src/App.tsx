@@ -46,24 +46,18 @@ const Account_name =[
 ]
 
 function App() {
-  const [registerEmail, setRegisterEmail] = useState("");
+  const [date, setDate] = useState("");
   function register() {
-    alert('Hello, Material-UI!');
-    liff
-      .sendMessages([
-        {
-          type: "text",
-          text: "Hello, World!",
-        },
-      ])
-      .then(() => {
-        console.log("message sent");
-      })
-      .catch((err) => {
-        console.log("error", err);
-      });
-    liff.closeWindow();
-  }
+    liff.sendMessages([{
+        'type': 'text',
+        'text': "テスト"
+    }]).then(function () {
+        liff.closeWindow();
+    }).catch(function (error) {
+        window.alert('Failed to send message ' + error);
+    });
+}
+
   function close(){
     liff.closeWindow();
   }
@@ -132,12 +126,18 @@ function App() {
                 options={Account_name}
                 renderInput={(params) => <TextField {...params} label="補助科目" />}
               />
+
               <FormControl fullWidth sx={{ m: 1 }}>
                 <InputLabel htmlFor="outlined-adornment-amount">金額</InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-amount"
                   endAdornment={<InputAdornment position="end">円</InputAdornment>}
                   label="金額"
+                  inputProps={{
+                    pattern: '[0-9]*', // 数字の正規表現パターン
+                    inputMode: 'numeric', // 数字入力モードを指定
+                    style: { textAlign: 'right' }, // 右寄せにするためのスタイル
+                  }}
                 />
               </FormControl>
               <Typography variant="h5" gutterBottom>
