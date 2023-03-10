@@ -88,7 +88,7 @@ function App() {
   function register() {
     liff.sendMessages([{
         'type': 'text',
-      'text': "簿記会計\n"+dayjs(date.valueOf()).format('YYYY/MM/DD')+"\n"+account_1+"\n"+subaccount_1+"\n"+amount+"\n"+account_2+"\n"+subaccount_2+"\n"+amount+"\n"+memo,
+      'text': "簿記記帳\n"+dayjs(date.valueOf()).format('YYYY/MM/DD')+"\n"+in_out +"\n" + account_1+"\n"+subaccount_1+"\n"+amount+"\n"+account_2+"\n"+subaccount_2+"\n"+amount+"\n"+ memo,
     }]).then(function () {
         liff.closeWindow();
     }).catch(function (error) {
