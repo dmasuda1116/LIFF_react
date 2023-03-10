@@ -138,123 +138,149 @@ function App() {
         <Grid item xs={10}>
           <Box sx={{ width: '100%' }}>
             <Stack spacing={2}>
-              <Typography variant="h5" gutterBottom>
-                ①日付を入力
-              </Typography>
-              <LocalizationProvider dateAdapter={AdapterDayjs} localeText={jaJP.components.MuiLocalizationProvider.defaultProps.localeText} adapterLocale="ja">
-                <DatePicker
-                  label="日付"
-                  defaultValue={dayjs(new Date())}
-                  view="day"
-                  componentsProps={{
-                    toolbar: {
-                      toolbarPlaceholder: "__",
-                      toolbarFormat: "YYYY年MM月DD日",
-                      hidden: true,
-                    }
-                  }}
-                  value={date}
-                  onChange={handleDateChange}
-                />
-              </LocalizationProvider>
-              <Typography variant="h5" gutterBottom>
-                ②収入または支出を選択
-              </Typography>
-              <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">収入/支出</FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  value={in_out}
-                  onChange={(event) => {setIn_out(event.target.value);}}
-                >
-                  <FormControlLabel value="収入" control={<Radio />} label="収入" />
-                  <FormControlLabel value="支出" control={<Radio />} label="支出" />
-                </RadioGroup>
-              </FormControl>
-              <Autocomplete
-                defaultValue={{label: "現金", id: 0}}
-                disablePortal
-                id="combo-box-demo"
-                options={Account_name_1}
-                renderInput={(params) => <TextField {...params} label="勘定科目" />}
-                inputValue={account_1}
-                onInputChange={(event, newInputValue) => {
-                  setAccount_1(newInputValue);
-                }}
-
-              />
-              <Autocomplete
-                defaultValue={{label: "補助科目なし", id: 0}}
-                disablePortal
-                id="combo-box-demo"
-                options={subAccount_name}
-                renderInput={(params) => <TextField {...params} label="補助科目" />}
-                inputValue={subaccount_1}
-                onInputChange={(event, newInputValue) => {
-                  setSubAccount_1(newInputValue);
-                }}
-              />
-              <Typography variant="h5" gutterBottom>
-                ③用途と金額を入力
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-                {in_out == "収入"? "何の収入ですか？" : "何に使いましたか？"}
-              </Typography>
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={in_out == "収入"? Account_name_2 : Account_name_3}
-                 // options={Account_name_2}
-                renderInput={(params) => <TextField {...params} label="勘定科目" />}
-                inputValue={account_2}
-                onInputChange={(event, newInputValue) => {
-                  setAccount_2(newInputValue);
-                }}
-              />
-              <Autocomplete
-                defaultValue={{label: "補助科目なし", id: 0}}
-                disablePortal
-                id="combo-box-demo"
-                options={subAccount_name}
-                renderInput={(params) => <TextField {...params} label="補助科目" />}
-                inputValue={subaccount_2}
-                onInputChange={(event, newInputValue) => {
-                  setSubAccount_2(newInputValue);
-                }}
-              />
-
-              <FormControl fullWidth sx={{ m: 1 }}>
-                <InputLabel htmlFor="outlined-adornment-amount">金額</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-amount"
-                  endAdornment={<InputAdornment position="end">円</InputAdornment>}
-                  label="金額"
-                  inputProps={{
-                    pattern: '[0-9]*', // 数字の正規表現パターン
-                    inputMode: 'numeric', // 数字入力モードを指定
-                    style: { textAlign: 'right' }, // 右寄せにするためのスタイル
-                  }}
-                  value={amount}
-                  onChange={(event) => {
-                    const newValue = event.target.value;
-                    if (/^\d*$/.test(newValue)) {
-                      setAmount(newValue === '' ? 0 : parseInt(newValue, 10));
-                    }
-                  }}
-
-                />
-              </FormControl>
-              <Typography variant="h5" gutterBottom>
-                ④その他事項を入力し登録
-              </Typography>
-              <TextField
-              id="outlined-basic"
-              label="摘要"
-              variant="outlined"
-              value={memo}
-              onChange={(event) => {setMemo(event.target.value);}} />
+              <Box component="span" sx={{ p: 2}}>
+                <Typography variant="h6" gutterBottom>
+                  日付
+                </Typography>
+                <LocalizationProvider dateAdapter={AdapterDayjs} localeText={jaJP.components.MuiLocalizationProvider.defaultProps.localeText} adapterLocale="ja">
+                  <DatePicker
+                    defaultValue={dayjs(new Date())}
+                    view="day"
+                    componentsProps={{
+                      toolbar: {
+                        toolbarPlaceholder: "__",
+                        toolbarFormat: "YYYY年MM月DD日",
+                        hidden: true,
+                      }
+                    }}
+                    value={date}
+                    onChange={handleDateChange}
+                  />
+                </LocalizationProvider>
+              </Box>
+              <Box component="span" sx={{ p: 2}}>
+                <Typography variant="h6" gutterBottom>
+                    収入/支出
+                </Typography>
+                <Box component="span" sx={{ p: 0.5}}>
+                  <FormControl>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                      value={in_out}
+                      onChange={(event) => {setIn_out(event.target.value);}}
+                    >
+                      <FormControlLabel value="収入" control={<Radio />} label="収入" />
+                      <FormControlLabel value="支出" control={<Radio />} label="支出" />
+                    </RadioGroup>
+                  </FormControl>
+                </Box>
+                <Box component="span" sx={{ p: 2}}>
+                  <Typography variant="subtitle1" gutterBottom>
+                    勘定科目
+                  </Typography>
+                  <Autocomplete
+                    defaultValue={{label: "現金", id: 0}}
+                    disablePortal
+                    id="combo-box-demo"
+                    options={Account_name_1}
+                    renderInput={(params) => <TextField {...params}/>}
+                    inputValue={account_1}
+                    onInputChange={(event, newInputValue) => {
+                      setAccount_1(newInputValue);
+                    }}
+                  />
+                </Box>
+                <Box component="span" sx={{ p: 0.5}}>
+                  <Typography variant="subtitle1" gutterBottom>
+                    補助科目
+                  </Typography>
+                  <Autocomplete
+                    defaultValue={{label: "補助科目なし", id: 0}}
+                    disablePortal
+                    id="combo-box-demo"
+                    options={subAccount_name}
+                    renderInput={(params) => <TextField {...params}/>}
+                    inputValue={subaccount_1}
+                    onInputChange={(event, newInputValue) => {
+                      setSubAccount_1(newInputValue);
+                    }}
+                  />
+                </Box>
+              </Box>
+              <Box component="span" sx={{ p: 2}}>
+                <Typography variant="h6" gutterBottom>
+                  用途と金額
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  {in_out == "収入"? "何の収入ですか？" : "何に使いましたか？"}
+                </Typography>
+                <Box component="span" sx={{ p: 0}}>
+                  <Typography variant="subtitle1" gutterBottom>
+                    勘定科目
+                  </Typography>
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={in_out == "収入"? Account_name_2 : Account_name_3}
+                    // options={Account_name_2}
+                    renderInput={(params) => <TextField {...params}/>}
+                    inputValue={account_2}
+                    onInputChange={(event, newInputValue) => {
+                      setAccount_2(newInputValue);
+                    }}
+                  />
+                </Box>
+                <Box component="span" sx={{ p: 0.5}}>
+                  <Typography variant="subtitle1" gutterBottom>
+                    補助科目
+                  </Typography>
+                  <Autocomplete
+                    defaultValue={{label: "補助科目なし", id: 0}}
+                    disablePortal
+                    id="combo-box-demo"
+                    options={subAccount_name}
+                    renderInput={(params) => <TextField {...params}/>}
+                    inputValue={subaccount_2}
+                    onInputChange={(event, newInputValue) => {
+                      setSubAccount_2(newInputValue);
+                    }}
+                  />
+                </Box>
+                <Box component="span" sx={{ p: 0.5}}>
+                  <Typography variant="subtitle1" gutterBottom>
+                    金額
+                  </Typography>
+                  <OutlinedInput
+                    id="outlined-adornment-amount"
+                    endAdornment={<InputAdornment position="end">円</InputAdornment>}
+                    inputProps={{
+                      pattern: '[0-9]*', // 数字の正規表現パターン
+                      inputMode: 'numeric', // 数字入力モードを指定
+                      style: { textAlign: 'right' }, // 右寄せにするためのスタイル
+                    }}
+                    value={amount}
+                    onChange={(event) => {
+                      const newValue = event.target.value;
+                      if (/^\d*$/.test(newValue)) {
+                        setAmount(newValue === '' ? 0 : parseInt(newValue, 10));
+                      }
+                    }}
+                  />
+                </Box>
+              </Box>
+              <Box component="span" sx={{ p: 2}}>
+                <Typography variant="h6" gutterBottom>
+                  その他事項
+                </Typography>
+                <TextField
+                id="outlined-basic"
+                label="摘要"
+                variant="outlined"
+                value={memo}
+                onChange={(event) => {setMemo(event.target.value);}} />
+              </Box>
               <Grid container spacing={2}>
                 <Grid item xs={4}/>
                 <Grid item xs={8}>
