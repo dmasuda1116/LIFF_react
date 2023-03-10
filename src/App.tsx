@@ -40,9 +40,41 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Account_name =[
+const Account_name_1 =[
   {label: "現金", id: 0},
-  {label: "当座預金", id: 1}
+  {label: "当座預金", id: 0},
+  {label: "普通預金", id: 0},
+
+]
+
+// 収入時の勘定科目
+const Account_name_2 =[
+  {label: "売上高", id: 0},
+  {label: "雑収入", id: 0},
+]
+
+// 支出時の勘定科目
+const Account_name_3 =[
+  {label: "会議費", id: 0},
+  {label: "接待交際費", id: 1},
+  {label: "旅費交通費", id: 2},
+  {label: "消耗品費", id: 3},
+  {label: "新聞図書費", id: 4},
+  {label: "地代家賃", id: 5},
+  {label: "通信費", id: 6},
+  {label: "水道光熱費", id: 7},
+  {label: "販売促進費", id: 8},
+  {label: "雑費", id: 9},
+  {label: "租税公費", id: 10},
+  {label: "外注費", id: 11},
+  {label: "修繕費", id: 12},
+  {label: "広告宣伝費", id: 13},
+  {label: "損害保険料費", id: 14},
+  {label: "減価償却費", id: 15},
+  {label: "給与賃金", id: 16},
+  {label: "福利厚生費", id: 17},
+  {label: "賃借料", id: 18},
+  {label: "研究開発費", id: 19},
 ]
 
 const subAccount_name =[
@@ -52,7 +84,7 @@ const subAccount_name =[
 
 function App() {
   const [date, setDate] = useState<Dayjs>(dayjs());
-  const [in_out, setIn_out] = useState("");
+  const [in_out, setIn_out] = useState("支出");
   const [account_1, setAccount_1] = useState("");
   const [subaccount_1, setSubAccount_1] = useState("");
   const [account_2, setAccount_2] = useState("");
@@ -145,7 +177,7 @@ function App() {
                 defaultValue={{label: "現金", id: 0}}
                 disablePortal
                 id="combo-box-demo"
-                options={Account_name}
+                options={Account_name_1}
                 renderInput={(params) => <TextField {...params} label="勘定科目" />}
                 inputValue={account_1}
                 onInputChange={(event, newInputValue) => {
@@ -167,10 +199,14 @@ function App() {
               <Typography variant="h5" gutterBottom>
                 ③用途と金額を入力
               </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                {in_out == "収入"? "何の収入ですか？" : "何に使いましたか？"}
+              </Typography>
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={Account_name}
+                options={in_out == "収入"? Account_name_2 : Account_name_3}
+                 // options={Account_name_2}
                 renderInput={(params) => <TextField {...params} label="勘定科目" />}
                 inputValue={account_2}
                 onInputChange={(event, newInputValue) => {
