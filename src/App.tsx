@@ -67,7 +67,7 @@ const Account_name_3 =[
   {label: "雑費", id: 9},
   {label: "租税公費", id: 10},
   {label: "外注費", id: 11},
-  {label: "修繕費", id: 12},
+  {label: "諸会費", id: 12},
   {label: "広告宣伝費", id: 13},
   {label: "損害保険料費", id: 14},
   {label: "減価償却費", id: 15},
